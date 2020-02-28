@@ -13,7 +13,7 @@ export default function WelcomePage() {
           alt="rick"
         />
       </header>
-      <Route path="/character-list">
+      <Route path="/character-list/">
         <CharacterList />
       </Route>
     </section>

@@ -2,20 +2,26 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import CharacterCard from "./CharacterCard";
 import SearchForm from "./SearchForm";
+import { Container, Row } from 'reactstrap';
+import styled from "styled-components";
+
+const SectionStyled = styled.div`
+text-align: center;
+`
 
 export default function CharacterList() {
   // TODO: Add useState to track data from useEffect
-  const [characters, setCharacters] = useState([]);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     // TODO: Add API Request here - must run in `useEffect`
 
     //  Important: verify the 2nd `useEffect` parameter: the dependancies array!
     axios
-      // .get(`https://cors-anywhere.herokuapp.com/https://rickandmortyapi.com/api/character/`)
+      .get(`https://cors-anywhere.herokuapp.com/https://rickandmortyapi.com/api/character/`)
       .then(response => {
         console.log(response.data.results);
-        setCharacters(response.data.results);
+        setData(response.data.results);
       })
       .catch(error => {
         console.log("the data was not returned", error);
@@ -24,18 +30,23 @@ export default function CharacterList() {
   }, []);
 
   return (
-    <section className="character-list">
+    <SectionStyled>
       {/* <h2>TODO: `array.map()` over your state here!</h2> */}
       <SearchForm />
-      {characters.map(character => {
+      {data.map(d => {
         return (
-          <CharacterCard
-            name={character.name}
-            status={character.status}
-            species={character.species}
-          />
+          <Container>
+            <Row>
+              <CharacterCard
+                key={d.id}
+                name={d.name}
+                status={d.status}
+                species={d.species}
+              />
+            </Row>
+          </Container>
         )
       })}
-    </section>
+    </SectionStyled>
   );
 }
