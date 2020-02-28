@@ -25,9 +25,11 @@ In this challenge, you will create a Single Page Application complete with Clien
 
 Demonstrate your understanding of this Sprint's concepts by answering the following free-form questions. Edit this document to include your answers after each question.
 
-- [ ]  Explain benefit(s) using `client-side routing`?
+- [X]  Explain benefit(s) using `client-side routing`?
 
 > Answer:
+
+Client-side routing is a JS routing option that offers control over your site URL & content without having to wait for the server to respond with content. It's a lot more efficient than server-side routing because every click or change of address sends new requests to a remote server & forces the entire page to have reload all its' elements over again that must be re-downloaded with each request. Client-side routing eliminates the need to do this by bringing everything in on the first time.
 
 ## Project Set Up
 
