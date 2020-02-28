@@ -11,19 +11,14 @@ const FormStyle = styled.form`
 margin: 2%;
 `
 
-export default function SearchForm() {
-  const [data, setData] = useState([]);
+export default function SearchForm(props) {
   const [query, setQuery] = useState("");
 
   useEffect(() => {
-    axios
-      .get(`https://cors-anywhere.herokuapp.com/https://rickandmortyapi.com/api/character/`)
-      .then(response => {
-        const characters = response.data.results.filter(character =>
-          character.name.toLowerCase().includes(query.toLowerCase())
-        );
-        setData(characters);
-      });
+    const characters = props.data.filter(character =>
+      character.name.toLowerCase().includes(query.toLowerCase())
+    );
+    props.setFilteredData(characters);
   }, [query]);
 
   const handleInputChange = e => {
@@ -45,16 +40,6 @@ export default function SearchForm() {
           autoComplete="on"
         />
       </FormStyle>
-      {data.map(d => {
-        return (
-          <CharacterCard
-            key={d.id}
-            name={d.name}
-            status={d.status}
-            species={d.species}
-          />
-        )
-      })}
     </SectionStyled>
   );
 }

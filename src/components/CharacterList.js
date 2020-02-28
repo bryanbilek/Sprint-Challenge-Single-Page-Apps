@@ -12,6 +12,7 @@ text-align: center;
 export default function CharacterList() {
   // TODO: Add useState to track data from useEffect
   const [data, setData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
 
   useEffect(() => {
     // TODO: Add API Request here - must run in `useEffect`
@@ -22,6 +23,7 @@ export default function CharacterList() {
       .then(response => {
         console.log(response.data.results);
         setData(response.data.results);
+        setFilteredData(response.data.results);
       })
       .catch(error => {
         console.log("the data was not returned", error);
@@ -32,8 +34,8 @@ export default function CharacterList() {
   return (
     <SectionStyled>
       {/* <h2>TODO: `array.map()` over your state here!</h2> */}
-      <SearchForm />
-      {data.map(d => {
+      <SearchForm data={data} setFilteredData={setFilteredData} />
+      {filteredData.map(d => {
         return (
           <Container>
             <Row>
